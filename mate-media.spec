@@ -1,7 +1,7 @@
 Summary:	MATE media programs
 Name:		mate-media
 Version:	1.5.1
-Release:	0.3
+Release:	0.4
 License:	GPLv2+ and LGPLv2+
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
@@ -18,6 +18,7 @@ BuildRequires:	pkgconfig(gstreamer-0.10)
 BuildRequires:	pkgconfig(gstreamer-plugins-base-0.10)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libcanberra)
+BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(unique-1.0)
 BuildRequires:	pulseaudio-devel
@@ -55,9 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-#find $RPM_BUILD_ROOT -name '*.la' -exec rm -rf {} ';'
-#find $RPM_BUILD_ROOT -name '*.a' -exec rm -rf {} ';'
-
 desktop-file-install \
 	--remove-category="MATE" \
 	--add-category="X-Mate" \
@@ -65,7 +63,7 @@ desktop-file-install \
 	--dir=$RPM_BUILD_ROOT%{_desktopdir} \
 $RPM_BUILD_ROOT%{_desktopdir}/mate-volume-control.desktop
 
-%find_lang %{name} --all-name
+%find_lang %{name} --with-omf --with-mate --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,15 +91,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/sounds/mate
 %{_datadir}/glib-2.0/schemas/org.mate.volume-control.gschema.xml
 %{_desktopdir}/mate-volume-control.desktop
-%{_datadir}/mate/help/mate-volume-control
-%{_datadir}/omf/mate-volume-control
 %attr(755,root,root) %{_libdir}/mixer_applet2
 %{_datadir}/dbus-1/services/org.mate.panel.applet.MixerAppletFactory.service
 %{_datadir}/glib-2.0/schemas/org.mate.panel.applet.mixer.gschema.xml
 %{_datadir}/mate-2.0/ui/mixer-applet-menu.xml
 %{_datadir}/mate-panel/applets/org.mate.applets.MixerApplet.mate-panel-applet
-%{_datadir}/mate/help/mate-mixer_applet2
-%{_datadir}/omf/mate-mixer_applet2
 
 # XXX proper dir
 %dir %{_datadir}/mate-2.0
