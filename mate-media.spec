@@ -6,10 +6,11 @@ License:	GPLv2+ and LGPLv2+
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
 # Source0-md5:	590e6b65c46266235271ac957694f844
-URL:		http://mate-desktop.org
+URL:		http://mate-desktop.org/
 BuildRequires:	clutter-gst-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	mate-common
+BuildRequires:	mate-control-center-devel >= 1.5
 BuildRequires:	mate-doc-utils
 BuildRequires:	mate-panel-devel
 BuildRequires:	pkgconfig(dbus-glib-1)
@@ -18,11 +19,11 @@ BuildRequires:	pkgconfig(gstreamer-plugins-base-0.10)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libcanberra)
 BuildRequires:	pkgconfig(libpulse)
-# mate-control-center-devel
-BuildRequires:	pkgconfig(mate-default-applications)
 BuildRequires:	pkgconfig(unique-1.0)
 BuildRequires:	pulseaudio-devel
 BuildRequires:	rarian-compat
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 Requires:	glib2 >= 1:2.26.0
 Requires(post):	desktop-file-utils
 Requires(postun):	desktop-file-utils
