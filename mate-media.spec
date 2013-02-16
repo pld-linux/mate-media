@@ -1,27 +1,25 @@
 Summary:	MATE media programs
 Name:		mate-media
 Version:	1.5.1
-Release:	0.4
+Release:	1
 License:	GPL v2+ and LGPL v2+
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
 # Source0-md5:	590e6b65c46266235271ac957694f844
 URL:		https://github.com/mate-desktop/mate-media
-BuildRequires:	clutter-gst-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	desktop-file-utils
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gstreamer0.10-devel
 BuildRequires:	gstreamer0.10-plugins-base-devel
 BuildRequires:	gtk+2-devel
 BuildRequires:	libcanberra-devel
+BuildRequires:	libcanberra-gtk-devel
 BuildRequires:	libunique-devel
 BuildRequires:	mate-common
-BuildRequires:	mate-control-center-devel >= 1.5
 BuildRequires:	mate-doc-utils
 BuildRequires:	mate-panel-devel >= 1.5
 BuildRequires:	pulseaudio-devel
-BuildRequires:	pulseaudio-devel
-BuildRequires:	rarian-compat
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
