@@ -1,0 +1,11 @@
+--- mate-media-1.5.1/./gst-mixer-applet/Makefile.am~	2012-12-09 17:07:08.000000000 +0200
++++ mate-media-1.5.1/./gst-mixer-applet/Makefile.am	2013-03-02 20:05:09.424777510 +0200
+@@ -48,7 +48,7 @@
+             -e "s|\@LIBEXECDIR\@|$(libexecdir)|" \
+             $< > $@
+ 
+-uidir   = $(datadir)/mate-2.0/ui
++uidir   = $(datadir)/mate-panel/ui
+ ui_DATA = mixer-applet-menu.xml
+ 
+ @INTLTOOL_XML_NOMERGE_RULE@

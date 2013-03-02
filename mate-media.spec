@@ -1,11 +1,12 @@
 Summary:	MATE media programs
 Name:		mate-media
 Version:	1.5.1
-Release:	1
+Release:	2
 License:	GPL v2+ and LGPL v2+
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
 # Source0-md5:	590e6b65c46266235271ac957694f844
+Patch0:		uidir.patch
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	dbus-glib-devel
 BuildRequires:	desktop-file-utils
@@ -23,10 +24,13 @@ BuildRequires:	pulseaudio-devel
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+Requires:	desktop-file-utils
 Requires:	glib2 >= 1:2.26.0
-Requires(post):	desktop-file-utils
-Requires(postun):	desktop-file-utils
+Requires:	gtk-update-icon-cache
+Requires:	mate-icon-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_libexecdir	%{_libdir}/mate-panel
 
 %description
 This package contains a few media utilities for the MATE desktop,
@@ -34,6 +38,7 @@ including a volume control.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 NOCONFIGURE=1 ./autogen.sh
@@ -67,34 +72,28 @@ $RPM_BUILD_ROOT%{_desktopdir}/mate-volume-control.desktop
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/ldconfig
 %update_desktop_database
 %update_icon_cache mate
 %glib_compile_schemas
 
 %postun
-/sbin/ldconfig
-%update_desktop_database_postun
+%update_desktop_database
 %update_icon_cache mate
 %glib_compile_schemas
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS NEWS README
+/etc/xdg/autostart/mate-volume-control-applet.desktop
 %attr(755,root,root) %{_bindir}/mate-volume-control
 %attr(755,root,root) %{_bindir}/mate-volume-control-applet
-%{_sysconfdir}/xdg/autostart/mate-volume-control-applet.desktop
-%{_iconsdir}/mate/*/*/*.png
+%attr(755,root,root) %{_libdir}/mate-panel/mixer_applet2
 %{_datadir}/mate-media
 %{_datadir}/sounds/mate
-%{_datadir}/glib-2.0/schemas/org.mate.volume-control.gschema.xml
+%{_datadir}/mate-panel/applets/org.mate.applets.MixerApplet.mate-panel-applet
+%{_datadir}/mate-panel/ui/mixer-applet-menu.xml
 %{_desktopdir}/mate-volume-control.desktop
-%attr(755,root,root) %{_libdir}/mixer_applet2
+%{_iconsdir}/mate/*/*/*.png
 %{_datadir}/dbus-1/services/org.mate.panel.applet.MixerAppletFactory.service
 %{_datadir}/glib-2.0/schemas/org.mate.panel.applet.mixer.gschema.xml
-%{_datadir}/mate-2.0/ui/mixer-applet-menu.xml
-%{_datadir}/mate-panel/applets/org.mate.applets.MixerApplet.mate-panel-applet
-
-# XXX proper dir
-%dir %{_datadir}/mate-2.0
-%dir %{_datadir}/mate-2.0/ui
+%{_datadir}/glib-2.0/schemas/org.mate.volume-control.gschema.xml
