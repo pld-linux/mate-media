@@ -1,11 +1,11 @@
 Summary:	MATE media programs
 Name:		mate-media
-Version:	1.5.1
-Release:	2
+Version:	1.5.2
+Release:	1
 License:	GPL v2+ and LGPL v2+
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
-# Source0-md5:	590e6b65c46266235271ac957694f844
+# Source0-md5:	bd6a1a8cdd84f42b81ce0130b24a149d
 Patch0:		uidir.patch
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	dbus-glib-devel
@@ -43,6 +43,7 @@ including a volume control.
 %build
 NOCONFIGURE=1 ./autogen.sh
 %configure \
+	--disable-silent-rules \
 	--disable-static \
 	--enable-gstmix \
 	--disable-schemas-compile \
@@ -51,13 +52,15 @@ NOCONFIGURE=1 ./autogen.sh
 	--enable-pulseaudio \
 	--with-gnu-ld
 
-%{__make} \
-	V=1
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+# mate < 1.5 did not exist in pld, avoid dependency on mate-conf
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/mate-volume-control.convert
 
 desktop-file-install \
 	--remove-category="MATE" \
