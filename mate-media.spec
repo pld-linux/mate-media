@@ -1,11 +1,11 @@
 Summary:	MATE media programs
 Name:		mate-media
-Version:	1.5.2
+Version:	1.6.0
 Release:	1
 License:	GPL v2+ and LGPL v2+
 Group:		X11/Applications/Multimedia
-Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
-# Source0-md5:	bd6a1a8cdd84f42b81ce0130b24a149d
+Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
+# Source0-md5:	96a2832f157a5879f62d27fbae89da07
 Patch0:		uidir.patch
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	dbus-glib-devel
