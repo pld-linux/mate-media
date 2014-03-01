@@ -2,7 +2,7 @@ Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
 Version:	1.6.1
-Release:	1
+Release:	2
 License:	LGPL v2+ (gst-mixer parts), GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
@@ -34,14 +34,15 @@ BuildRequires:	xz
 Requires:	desktop-file-utils
 Requires:	glib2 >= 1:2.26.0
 Requires:	gstreamer0.10 >= 0.10.23
+Requires:	gstreamer0.10-audiosink-alsa
 Requires:	gstreamer0.10-plugins-base >= 0.10.23
 Requires:	gtk+2 >= 2:2.18.0
 Requires:	gtk-update-icon-cache
 Requires:	libcanberra >= 0.13
 Requires:	libcanberra-gtk >= 0.13
 Requires:	mate-desktop-libs >= 1.5.0
-Requires:	mate-panel >= 1.5.0
 Requires:	mate-icon-theme
+Requires:	mate-panel >= 1.5.0
 Requires:	pulseaudio-libs >= 0.9.16
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -52,8 +53,8 @@ This package contains a few media utilities for the MATE desktop,
 including a volume control.
 
 %description -l pl.UTF-8
-Ten pakiet zawiera kilka narzędzi multimedialnych dla środowiska
-MATE, w tym do sterowania głośnością dźwięku.
+Ten pakiet zawiera kilka narzędzi multimedialnych dla środowiska MATE,
+w tym do sterowania głośnością dźwięku.
 
 %prep
 %setup -q
