@@ -61,7 +61,6 @@ w tym do sterowania głośnością dźwięku.
 %patch0 -p1
 
 %build
-mate-doc-prepare --copy --force
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
