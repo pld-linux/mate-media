@@ -6,7 +6,7 @@ Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
 Version:	1.8.0
-Release:	2
+Release:	3
 License:	LGPL v2+ (gst-mixer parts), GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
@@ -92,8 +92,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{with gst}
 # mate < 1.5 did not exist in pld, avoid dependency on mate-conf
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/mate-volume-control.convert
+%endif
+
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
 
 desktop-file-install \
@@ -123,17 +126,20 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/mate-volume-control
 %attr(755,root,root) %{_bindir}/mate-volume-control-applet
-%attr(755,root,root) %{_libdir}/mate-panel/mixer_applet2
 /etc/xdg/autostart/mate-volume-control-applet.desktop
 %{_datadir}/mate-media
 %{_datadir}/sounds/mate
-%{_datadir}/mate-panel/applets/org.mate.applets.MixerApplet.mate-panel-applet
-%{_datadir}/mate-panel/ui/mixer-applet-menu.xml
+%{_desktopdir}/mate-volume-control.desktop
+%{_mandir}/man1/mate-volume-control.1*
+%{_mandir}/man1/mate-volume-control-applet.1*
+
+%if %{with gst}
+%attr(755,root,root) %{_libdir}/mate-panel/mixer_applet2
 %{_datadir}/dbus-1/services/org.mate.panel.applet.MixerAppletFactory.service
 %{_datadir}/glib-2.0/schemas/org.mate.panel.applet.mixer.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.volume-control.gschema.xml
-%{_desktopdir}/mate-volume-control.desktop
+%{_datadir}/mate-panel/applets/org.mate.applets.MixerApplet.mate-panel-applet
+%{_datadir}/mate-panel/ui/mixer-applet-menu.xml
 %{_iconsdir}/mate/16x16/devices/gvc-*.png
 %{_iconsdir}/mate/16x16/status/audio-input-microphone-muted.png
-%{_mandir}/man1/mate-volume-control.1*
-%{_mandir}/man1/mate-volume-control-applet.1*
+%endif
