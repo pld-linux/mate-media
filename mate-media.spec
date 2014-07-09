@@ -1,6 +1,7 @@
 #
 # Conditional build:
-%bcond_with	gst		# enable gstreamer (breaks pulseaudio unmute)
+%bcond_with	gst		# enable gstreamer mixer (breaks pulseaudio unmute)
+%bcond_with	gtk3		# use GTK+ 3.x instead of 2.x
 
 Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
@@ -18,12 +19,17 @@ BuildRequires:	automake >= 1:1.9
 BuildRequires:	desktop-file-utils
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	glib2-devel >= 1:2.26.0
-BuildRequires:	gtk+2-devel >= 2:2.24.0
+BuildRequires:	gstreamer0.10-devel >= 0.10.23
+BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.23
+%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
+%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libcanberra-devel >= 0.13
-BuildRequires:	libcanberra-gtk-devel >= 0.13
+%{!?with_gtk3:BuildRequires:	libcanberra-gtk-devel >= 0.13}
+%{?with_gtk3:BuildRequires:	libcanberra-gtk3-devel >= 0.13}
 BuildRequires:	libtool >= 1:1.4.3
-BuildRequires:	libunique-devel >= 1.0
+%{!?with_gtk3:BuildRequires:	libunique-devel >= 1.0}
+%{?with_gtk3:BuildRequires:	libunique3-devel >= 3.0}
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	mate-common >= 1.2.1
 BuildRequires:	mate-desktop-devel >= 1.7.3
@@ -33,25 +39,21 @@ BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	yelp-tools
-%if %{with gst}
-BuildRequires:	gstreamer0.10-devel >= 0.10.23
-BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.23
-%endif
 Requires:	desktop-file-utils
 Requires:	glib2 >= 1:2.26.0
-Requires:	gtk+2 >= 2:2.24.0
+Requires:	gstreamer0.10 >= 0.10.23
+Requires:	gstreamer0.10-audiosink-alsa
+Requires:	gstreamer0.10-plugins-base >= 0.10.23
+%{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
+%{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
 Requires:	gtk-update-icon-cache
 Requires:	libcanberra >= 0.13
-Requires:	libcanberra-gtk >= 0.13
+%{!?with_gtk3:Requires:	libcanberra-gtk >= 0.13}
+%{?with_gtk3:Requires:	libcanberra-gtk3 >= 0.13}
 Requires:	mate-desktop-libs >= 1.7.3
 Requires:	mate-icon-theme
 Requires:	mate-panel >= 1.7.0
 Requires:	pulseaudio-libs >= 0.9.16
-%if %{with gst}
-Requires:	gstreamer0.10 >= 0.10.23
-Requires:	gstreamer0.10-audiosink-alsa
-Requires:	gstreamer0.10-plugins-base >= 0.10.23
-%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libexecdir	%{_libdir}/mate-panel
@@ -76,14 +78,13 @@ w tym do sterowania głośnością dźwięku.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{__enable_disable gst gstreamer} \
-	%{__enable_disable gst gst-mixer-applet} \
+	%{__enable_disable gst gst-mixer} \
 	--enable-pulseaudio \
 	--disable-schemas-compile \
-	--disable-scrollkeeper \
 	--disable-silent-rules \
 	--disable-static \
-	--with-gnu-ld
+	--with-gnu-ld \
+	%{?with_gtk3:--with-gtk=3.0}
 
 %{__make}
 
@@ -97,8 +98,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/mate-volume-control.convert
 %endif
 
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
-
 desktop-file-install \
 	--remove-category="MATE" \
 	--add-category="X-Mate" \
@@ -106,7 +105,7 @@ desktop-file-install \
 	--dir=$RPM_BUILD_ROOT%{_desktopdir} \
 	$RPM_BUILD_ROOT%{_desktopdir}/mate-volume-control.desktop
 
-%find_lang %{name} --with-omf --with-mate --all-name
+%find_lang %{name} --with-mate --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
