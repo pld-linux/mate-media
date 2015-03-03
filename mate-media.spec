@@ -7,7 +7,7 @@ Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
 Version:	1.8.0
-Release:	3
+Release:	4
 License:	LGPL v2+ (gst-mixer parts), GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
