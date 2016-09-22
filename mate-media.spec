@@ -5,12 +5,12 @@
 Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
-Version:	1.14.1
+Version:	1.16.0
 Release:	1
 License:	GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
-Source0:	http://pub.mate-desktop.org/releases/1.14/%{name}-%{version}.tar.xz
-# Source0-md5:	e1d243247582ec94f39402ed24126228
+Source0:	http://pub.mate-desktop.org/releases/1.16/%{name}-%{version}.tar.xz
+# Source0-md5:	72df475882f9a93fb3ec42977c88ebd6
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
