@@ -1,20 +1,20 @@
 Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
-Version:	1.18.2
+Version:	1.20.0
 Release:	1
 License:	GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
-Source0:	http://pub.mate-desktop.org/releases/1.18/%{name}-%{version}.tar.xz
-# Source0-md5:	c65e21cc281a93a2f3bcf895db6939b3
+Source0:	http://pub.mate-desktop.org/releases/1.20/%{name}-%{version}.tar.xz
+# Source0-md5:	e413ae2b1eb7e3fac26679c0790a2076
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	desktop-file-utils
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.36.0
-BuildRequires:	gtk+3-devel >= 3.14
+BuildRequires:	glib2-devel >= 1:2.50.0
+BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libcanberra-devel >= 0.13
 BuildRequires:	libcanberra-gtk3-devel >= 0.13
@@ -28,8 +28,8 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires:	desktop-file-utils
-Requires:	glib2 >= 1:2.36.0
-Requires:	gtk+3 >= 3.14
+Requires:	glib2 >= 1:2.50.0
+Requires:	gtk+3 >= 3.22
 Requires:	libcanberra >= 0.13
 Requires:	libcanberra-gtk3 >= 0.13
 Requires:	libmatemixer >= 1.10.0
