@@ -1,12 +1,12 @@
 Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
-Version:	1.22.0
+Version:	1.22.1
 Release:	1
 License:	GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
-# Source0-md5:	414d513bccd4817b091a9f5ca1d894c5
+# Source0-md5:	d274cf297aa0566a27215299d3ab121b
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
@@ -91,10 +91,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/mate-volume-control
-%attr(755,root,root) %{_bindir}/mate-volume-control-applet
-/etc/xdg/autostart/mate-volume-control-applet.desktop
+%attr(755,root,root) %{_bindir}/mate-volume-control-status-icon
+/etc/xdg/autostart/mate-volume-control-status-icon.desktop
 %{_datadir}/mate-media
 %{_datadir}/sounds/mate
 %{_desktopdir}/mate-volume-control.desktop
 %{_mandir}/man1/mate-volume-control.1*
 %{_mandir}/man1/mate-volume-control-applet.1*
+%{_datadir}/dbus-1/services/org.mate.panel.applet.GvcAppletFactory.service
+%{_datadir}/mate-panel/applets/org.mate.applets.GvcApplet.mate-panel-applet
+%attr(755,root,root) %{_libexecdir}/mate-volume-control-applet
