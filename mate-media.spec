@@ -2,7 +2,7 @@ Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
 Version:	1.22.1
-Release:	1
+Release:	2
 License:	GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
 Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
@@ -23,6 +23,7 @@ BuildRequires:	libtool >= 1:1.4.3
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	mate-common >= 1.2.1
 BuildRequires:	mate-desktop-devel >= 1.17.0
+BuildRequires:	mate-panel-devel >= 1.17.0
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -34,7 +35,12 @@ Requires:	libcanberra >= 0.13
 Requires:	libcanberra-gtk3 >= 0.13
 Requires:	libmatemixer >= 1.10.0
 Requires:	mate-desktop-libs >= 1.17.0
+Requires:	mate-panel >= 1.17.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# use the same libexecdir as mate-panel
+# (better solution: store mate-panel libexecdir in libmatepanelapplet-*.pc and read it here)
+%define		matepanel_libexecdir	%{_libexecdir}/mate-panel
 
 %description
 This package contains a few media utilities for the MATE desktop,
@@ -55,6 +61,7 @@ w tym do sterowania głośnością dźwięku.
 %{__autoheader}
 %{__automake}
 %configure \
+	--libexecdir=%{matepanel_libexecdir} \
 	--disable-schemas-compile \
 	--disable-silent-rules \
 	--disable-static \
@@ -67,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{es_ES,frp,jv,kab,ku_IQ,pms}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{es_ES,frp,jv,ku_IQ,pms}
 
 desktop-file-install \
 	--remove-category="MATE" \
@@ -98,6 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/mate-volume-control.desktop
 %{_mandir}/man1/mate-volume-control.1*
 %{_mandir}/man1/mate-volume-control-applet.1*
+# panel applet
+%attr(755,root,root) %{matepanel_libexecdir}/mate-volume-control-applet
 %{_datadir}/dbus-1/services/org.mate.panel.applet.GvcAppletFactory.service
 %{_datadir}/mate-panel/applets/org.mate.applets.GvcApplet.mate-panel-applet
-%attr(755,root,root) %{_libexecdir}/mate-volume-control-applet
