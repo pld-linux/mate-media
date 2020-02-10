@@ -1,21 +1,20 @@
 Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
-Version:	1.22.2
+Version:	1.24.0
 Release:	1
 License:	GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
-Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
-# Source0-md5:	c191332344b2bc6a42de456a0ff27419
+Source0:	http://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
+# Source0-md5:	d6633da7b597ed4415fc87d7319f31eb
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	desktop-file-utils
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gettext-tools
+BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gtk+3-devel >= 3.22
-BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libcanberra-devel >= 0.13
 BuildRequires:	libcanberra-gtk3-devel >= 0.13
 BuildRequires:	libmatemixer-devel >= 1.10.0
@@ -54,7 +53,6 @@ w tym do sterowania głośnością dźwięku.
 %setup -q
 
 %build
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
