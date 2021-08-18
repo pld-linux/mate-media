@@ -1,12 +1,12 @@
 Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
-Version:	1.24.1
+Version:	1.26.0
 Release:	1
 License:	GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
-Source0:	http://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
-# Source0-md5:	fd8fbbced396de71574b82aac77580c4
+Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
+# Source0-md5:	1f7f7abf9c0e8acec7402401a46dfc5b
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
@@ -102,7 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/sounds/mate
 %{_desktopdir}/mate-volume-control.desktop
 %{_mandir}/man1/mate-volume-control.1*
-%{_mandir}/man1/mate-volume-control-applet.1*
+%{_mandir}/man1/mate-volume-control-status-icon.1*
 # panel applet
 %attr(755,root,root) %{matepanel_libexecdir}/mate-volume-control-applet
 %{_datadir}/dbus-1/services/org.mate.panel.applet.GvcAppletFactory.service
