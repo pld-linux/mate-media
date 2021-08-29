@@ -24,6 +24,7 @@ BuildRequires:	mate-common >= 1.2.1
 BuildRequires:	mate-desktop-devel >= 1.17.0
 BuildRequires:	mate-panel-devel >= 1.17.0
 BuildRequires:	rpmbuild(find_lang) >= 1.36
+BuildRequires:	rpmbuild(macros) >= 1.445
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	yelp-tools
