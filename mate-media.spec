@@ -1,12 +1,12 @@
 Summary:	MATE media programs
 Summary(pl.UTF-8):	Programy multimedialne dla środowiska MATE
 Name:		mate-media
-Version:	1.26.2
-Release:	2
+Version:	1.28.1
+Release:	1
 License:	GPL v2+ (volume control, sound theme), FDL (documentation)
 Group:		X11/Applications/Multimedia
-Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
-# Source0-md5:	4202b5b5bf55f9069aff04701e19124f
+Source0:	https://pub.mate-desktop.org/releases/1.28/%{name}-%{version}.tar.xz
+# Source0-md5:	652d7db93b9b6f91accc3a345d5c20c8
 URL:		https://github.com/mate-desktop/mate-media
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
@@ -14,6 +14,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.50.0
+BuildRequires:	gtk-layer-shell-devel >= 0.6
 BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	libcanberra-devel >= 0.13
 BuildRequires:	libcanberra-gtk3-devel >= 0.13
@@ -26,11 +27,14 @@ BuildRequires:	mate-panel-devel >= 1.17.0
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	rpmbuild(macros) >= 1.445
 BuildRequires:	tar >= 1:1.22
+# wayland-client
+BuildRequires:	wayland-devel
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires:	desktop-file-utils
 Requires:	glib2 >= 1:2.50.0
 Requires:	gtk+3 >= 3.22
+Requires:	gtk-layer-shell >= 0.6
 Requires:	libcanberra >= 0.13
 Requires:	libcanberra-gtk3 >= 0.13
 Requires:	libmatemixer >= 1.10.0
